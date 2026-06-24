@@ -1,0 +1,34 @@
+models:
+  qwen7b:
+    name: "Qwen_7B"
+    path: "Qwen/Qwen2.5-7B-Instruct"
+  qwen7b_ckpt:
+    name: "Qwen_7B_ckpt"
+    path: "/checkpoints/qwen7b_finetuned_epoch3"  # local path
+  llama8b:
+    name: "Llama_8B"
+    path: "meta-llama/Llama-3.1-8B"
+
+default_model: "qwen7b" # should keep it the same as the key
+
+
+seed: 42
+
+dataset:
+  truthfulqa:
+    name: "truthfulqa"
+    split: "validation"
+    n_samples: null # means use all
+  simpleqa:
+    name: "simpleqa"
+    n_samples: null # means use all
+
+default_dataset: "truthfulqa"
+
+paths:
+  output_dir: "results/"
+
+experiment:
+  logit_lens: true
+  probe: true
+  geometry: true
