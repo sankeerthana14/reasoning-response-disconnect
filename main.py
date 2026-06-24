@@ -58,7 +58,9 @@ def main():
 
     output_dir = args.output_dir if args.output_dir is not None else config['paths']['output_dir']
 
-
+    print(f"="*80})
+    print(f"RUN INFORMATION:")
+    print(f"-"*80)
     print(f"Model key:   {model_key}")
     print(f"Model name:  {model_name}")
     print(f"Model path:  {model_path}")
@@ -67,6 +69,7 @@ def main():
     print(f"Samples:     {num_samples}")
     print(f"Output dir:  {output_dir}")
     print(f"Device:      {args.device}")
+    print(f"="*80})
 
 
 if __name__ == "__main__":
