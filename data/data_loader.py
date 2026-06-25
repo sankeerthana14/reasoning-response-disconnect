@@ -59,9 +59,10 @@ def download_strategyqa(dataset_config):
     print(f"INFO: StrategyQA has been successfully saved as a CSV file at {dataset_config['raw_path']}!")
 
 
-def load_data(dataset_key, dataset_config, num_samples, seed):
+def load_data(dataset_config, num_samples, seed):
     raw_path = dataset_config['raw_path']
-    
+    dataset_key = dataset_config['name']
+
     # Download and format the data if not already downloaded
     if not os.path.exists(raw_path):
         # download, normalise, save, return
