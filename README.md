@@ -14,7 +14,7 @@ own internal state.
 ## Approach
 1. **Locate the disconnect** — Layer-wise logit lens and linear probing 
    across Qwen, Mistral, and Llama model families on SimpleQA, 
-   TruthfulQA, and GSM8K
+   TruthfulQA, and StrategyQA.
 2. **Attribute causally** — Activation patching to isolate whether 
    suppression originates in MLP blocks or attention heads
 3. **Extract truth features** — SAELens to identify sparse features 
