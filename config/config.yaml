@@ -25,6 +25,7 @@ dataset:
     name: "simpleqa"
     url: "https://openaipublic.blob.core.windows.net/simple-evals/simple_qa_test_set.csv"
     n_samples: null
+    split: null
     raw_path: "data/raw/simpleqa.csv"
   strategyqa:
     name: "strategyqa"
@@ -32,7 +33,7 @@ dataset:
     split: "train"
     n_samples: null
     raw_path: "data/raw/strategyqa.csv"
-    
+
 default_dataset: "truthfulqa"
 
 paths:
