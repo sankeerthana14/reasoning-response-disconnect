@@ -1,7 +1,6 @@
 import os
-import torch
 import pandas as pd
-from datasets import load_dataset, load_from_csv
+from datasets import load_dataset
 
 # pass in dataset_config['dataset']['truthfulqa']
 def download_truthfulqa(dataset_config):
@@ -63,10 +62,8 @@ def download_strategyqa(dataset_config):
 def load_data(dataset_key, dataset_config, num_samples, seed):
     raw_path = dataset_config['raw_path']
     
-    if os.path.exists(raw_path):
-        # load from saved CSV
-        return load_from_csv(raw_path, num_samples, seed)
-    else:
+    # Download and format the data if not already downloaded
+    if not os.path.exists(raw_path):
         # download, normalise, save, return
         if dataset_key == "truthfulqa":
             download_truthfulqa(dataset_config)
@@ -74,4 +71,15 @@ def load_data(dataset_key, dataset_config, num_samples, seed):
             download_simpleqa(dataset_config)
         elif dataset_key == "strategyqa":
             download_strategyqa(dataset_config)
+
+    # Loading the downloaded data
+    df = pd.read_csv(raw_path)
+
+    # If num_samples that is not None is given:
+    if num_samples is not None:
+        df = df.sample(num_samples, random_state=seed).reset_index(drop=True)
+
+    return df
+
+
         
