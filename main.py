@@ -17,6 +17,7 @@ import argparse
 import utils.PATHS as PATHS
 import data.data_loader as DATA_LOADER
 import models.model_loader as MODEL_LOADER
+from experiments import logit_lens as LOGIT_LENS
 
 
 
@@ -86,6 +87,10 @@ def main():
     print(f"INFO: {dataset_name} loaded with {len(dataset)} samples successfully!")
 
     model = MODEL_LOADER.load_model(config['models'][model_key], args.device)
+
+    # 3. Running the Logit Lens Experiment
+    #-----------------------------------------
+    LOGIT_LENS.main()
 
     
 
