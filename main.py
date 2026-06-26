@@ -15,6 +15,9 @@ import yaml
 import torch
 import argparse
 import utils.PATHS as PATHS
+import data.data_loader as DATA_LOADER
+import models.model_loader as MODEL_LOADER
+from experiments import logit_lens as LOGIT_LENS
 
 
 
@@ -40,22 +43,29 @@ def parse_args():
 def main():
     args = parse_args()
 
+    # 1. Parsing and assigning the arguments
+    #---------------------------------------------
+
     # loading the config.yaml file
     with open('config/config.yaml', 'r') as f:
         config = yaml.safe_load(f)
 
     # assigning the arguments value between the config.yaml and the given arguments
+    # model-related
     model_key = args.model if args.model is not None else config['default_model']
     model_name = config['models'][model_key]['name']
     model_path = config['models'][model_key]['path']
 
+    # dataset-related
     dataset_key = args.dataset if args.dataset is not None else config['default_dataset']
     dataset_name = config['dataset'][dataset_key]['name']
     dataset_split = config['dataset'][dataset_key]['split']
     num_samples = args.num_samples if args.num_samples is not None else config['dataset'][dataset_key]['n_samples']
 
+    # seed
     seed = args.seed 
 
+    # output-related
     output_dir = args.output_dir if args.output_dir is not None else config['paths']['output_dir']
 
     print(f"="*80)
@@ -70,6 +80,19 @@ def main():
     print(f"Output dir:  {output_dir}")
     print(f"Device:      {args.device}")
     print(f"="*80)
+
+    # 2. Loads the dataset and the model
+    #--------------------------------------
+    dataset = DATA_LOADER.load_data(config['dataset'][dataset_key], num_samples, seed)
+    print(f"INFO: {dataset_name} loaded with {len(dataset)} samples successfully!")
+
+    model = MODEL_LOADER.load_model(config['models'][model_key], args.device)
+
+    # 3. Running the Logit Lens Experiment
+    #-----------------------------------------
+    results = LOGIT_LENS.run_logit_lens(dataset, model, output_dir, model_name, dataset_name)
+
+    
 
 
 if __name__ == "__main__":
