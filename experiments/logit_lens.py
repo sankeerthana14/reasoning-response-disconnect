@@ -18,7 +18,7 @@ def format_prompt(question, model):
 
     return prompt
 
-def logit_lens(dataset, model, output_dir, model_name, dataset_name):
+def run_logit_lens(dataset, model, output_dir, model_name, dataset_name):
     """
     1. Format prompt
     2. Convert to Tokens

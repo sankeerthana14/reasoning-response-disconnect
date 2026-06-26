@@ -16,7 +16,7 @@ seed: 42
 dataset:
   truthfulqa:
     name: "truthfulqa"
-    hf_name: "truthful_qa"
+    hf_name: "truthfulqa/truthful_qa"
     hf_config: "generation"
     split: "validation"
     n_samples: null

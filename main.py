@@ -90,7 +90,7 @@ def main():
 
     # 3. Running the Logit Lens Experiment
     #-----------------------------------------
-    LOGIT_LENS.main()
+    results = LOGIT_LENS.run_logit_lens(dataset, model, output_dir, model_name, dataset_name)
 
     
 

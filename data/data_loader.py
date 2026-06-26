@@ -4,7 +4,7 @@ from datasets import load_dataset
 
 # pass in dataset_config['dataset']['truthfulqa']
 def download_truthfulqa(dataset_config):
-
+    os.makedirs(os.path.dirname(dataset_config['raw_path']), exist_ok=True)
     tqa = load_dataset(dataset_config['hf_name'], dataset_config['hf_config'], split=dataset_config['split'])
 
     # correct_answers - possible other correct answers other than the GT answer
@@ -25,6 +25,7 @@ def download_truthfulqa(dataset_config):
 
 
 def download_simpleqa(dataset_config):
+    os.makedirs(os.path.dirname(dataset_config['raw_path']), exist_ok=True)
     sqa = pd.read_csv(dataset_config['url'])
 
     df = sqa[['problem', 'answer']].copy()
@@ -42,6 +43,7 @@ def download_strategyqa(dataset_config):
     """
     This function downloads the strategyqa and extracts only the useful columns and saves them as a CSV file.
     """
+    os.makedirs(os.path.dirname(dataset_config['raw_path']), exist_ok=True)
     stratqa = load_dataset(dataset_config['hf_name'], split=dataset_config['split'])
 
     rows = []
